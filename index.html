@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="description" content="SkyPulse — Real-time weather dashboard with 5-day forecast, hourly data, UV index, and more."/>
+  <meta name="theme-color" content="#0b0f1e"/>
+  <title>SkyPulse — Weather Dashboard</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌤️</text></svg>"/>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+</head>
+<body>
+  <div class="bg-orbs">
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+    <div class="orb orb3"></div>
+  </div>
+
+  <div class="container">
+
+    <!-- Header -->
+    <header class="header">
+      <div class="logo">
+        <i class="fa-solid fa-cloud-sun"></i>
+        <span>SkyPulse</span>
+      </div>
+      <div class="header-right">
+        <div class="datetime">
+          <div id="liveTime" class="live-time"></div>
+          <div id="liveDate" class="live-date"></div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Search -->
+    <div class="search-wrapper">
+      <div class="search-bar">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="cityInput" placeholder="Search for a city..." autocomplete="off"/>
+        <button id="searchBtn" onclick="searchWeather()">
+          <span class="btn-text">Search</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Error -->
+    <div id="error" class="error hidden">
+      <i class="fa-solid fa-circle-exclamation"></i>
+      <span id="errorMsg"></span>
+    </div>
+
+    <!-- Loader -->
+    <div id="loader" class="loader hidden">
+      <div class="spinner"></div>
+      <p>Fetching weather data...</p>
+    </div>
+
+    <!-- Main Weather Card -->
+    <div id="weatherCard" class="weather-card hidden">
+      <div class="card-top">
+        <div class="location-block">
+          <h2 id="cityName"></h2>
+          <p class="local-time"><i class="fa-regular fa-clock"></i> <span id="localTime"></span></p>
+          <p id="description" class="condition-text"></p>
+        </div>
+        <div class="temp-block">
+          <img id="weatherIcon" src="" alt="Weather condition icon"/>
+          <div>
+            <div id="temperature" class="big-temp"></div>
+            <div id="tempRange" class="temp-range"></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="divider"></div>
+
+      <div class="details-grid">
+        <div class="detail-item">
+          <i class="fa-solid fa-temperature-half"></i>
+          <span>Feels Like</span>
+          <strong id="feelsLike"></strong>
+        </div>
+        <div class="detail-item">
+          <i class="fa-solid fa-droplet"></i>
+          <span>Humidity</span>
+          <strong id="humidity"></strong>
+        </div>
+        <div class="detail-item">
+          <i class="fa-solid fa-wind"></i>
+          <span>Wind Speed</span>
+          <strong id="wind"></strong>
+        </div>
+        <div class="detail-item">
+          <i class="fa-solid fa-eye"></i>
+          <span>Visibility</span>
+          <strong id="visibility"></strong>
+        </div>
+        <div class="detail-item">
+          <i class="fa-solid fa-sun"></i>
+          <span>UV Index</span>
+          <strong id="uvIndex"></strong>
+        </div>
+        <div class="detail-item">
+          <i class="fa-solid fa-gauge-high"></i>
+          <span>Pressure</span>
+          <strong id="pressure"></strong>
+        </div>
+        <div class="detail-item">
+          <i class="fa-solid fa-sunrise"></i>
+          <span>Sunrise</span>
+          <strong id="sunrise"></strong>
+        </div>
+        <div class="detail-item">
+          <i class="fa-solid fa-sunset"></i>
+          <span>Sunset</span>
+          <strong id="sunset"></strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- 5-Day Forecast -->
+    <div id="forecastSection" class="forecast-section hidden">
+      <div class="section-title">
+        <i class="fa-solid fa-calendar-days"></i>
+        <h3>5-Day Forecast</h3>
+      </div>
+      <div id="forecastCards" class="forecast-cards"></div>
+    </div>
+
+    <!-- Hourly Forecast -->
+    <div id="hourlySection" class="hourly-section hidden">
+      <div class="section-title">
+        <i class="fa-solid fa-clock-rotate-left"></i>
+        <h3>Today's Hourly</h3>
+      </div>
+      <div id="hourlyCards" class="hourly-cards"></div>
+    </div>
+
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
